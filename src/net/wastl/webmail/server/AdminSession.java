@@ -110,7 +110,6 @@ public class AdminSession implements HTTPSession {
         last_access=System.currentTimeMillis();
         remote_agent=h.getHeader("User-Agent").replace('\n',' ');
         remote_accepts=h.getHeader("Accept").replace('\n',' ');
-        //env=new Hashtable();
         model=parent.getStorage().createXMLAdminModel();
         login(h);
         log.info("WebMail: New Session ("+session_code+")");
@@ -249,11 +248,7 @@ public class AdminSession implements HTTPSession {
                  auth.changePassword(user,head.getContent("user password"),head.getContent("user password"));
             }
             catch (InvalidPasswordException e) {
-                /* XXX Not sure this is the right exception */
-                            /**
-                throw new InvalidDataException(parent.getStorage().getStringResource("EX NO CHANGE PASSWORD", Locale.getDefault()));
-                                **/
-                                throw new InvalidDataException(parent.getStorage().getStringResource("EX NO CHANGE PASSWORD", parent.getDefaultLocale()));
+            	throw new InvalidDataException(parent.getStorage().getStringResource("EX NO CHANGE PASSWORD", parent.getDefaultLocale()));
             }
             } else {
                 throw new InvalidDataException(parent.getStorage().getStringResource("EX NO CHANGE PASSWORD",Locale.getDefault()));
@@ -281,7 +276,6 @@ public class AdminSession implements HTTPSession {
 
 
     public void setEnv(String key, String value) {
-        //env.put(key,value);
         model.setStateVar(key,value);
     }
 
@@ -323,11 +317,11 @@ public class AdminSession implements HTTPSession {
                     sess_elem.appendChild(model.createTextElement("SESS_USER",w.getUserName()));
                     sess_elem.appendChild(model.createTextElement("SESS_CODE",w.getSessionCode()));
                     sess_elem.appendChild(model.createTextElement("SESS_ADDRESS",w.getRemoteAddress().toString()));
-                    sess_elem.appendChild(model.createStateVar("idle time",(System.currentTimeMillis()-w.getLastAccess())/1000+""));
+                    sess_elem.appendChild(model.createStateVar("idle time",(System.currentTimeMillis()-w.getLastAccess())/1000));
 
                     for (Map.Entry<String, Folder> connEntry :
                             w.getActiveConnections().entrySet()) try {
-                        sess_elem.appendChild(model.createTextElement("SESS_CONN",connEntry.getValue().getURLName()+""));
+                        sess_elem.appendChild(model.createTextElement("SESS_CONN",connEntry.getValue().getURLName()));
                     } catch(Exception ex) {
                         sess_elem.appendChild(model.createTextElement("SESS_CONN","Error while fetching connection "+connEntry.getKey()));
                     }
@@ -339,7 +333,7 @@ public class AdminSession implements HTTPSession {
                     sess_elem.appendChild(model.createTextElement("SESS_USER","Administrator"));
                     sess_elem.appendChild(model.createTextElement("SESS_ADDRESS",h.getRemoteAddress().toString()));
                     sess_elem.appendChild(model.createTextElement("SESS_CODE",h.getSessionCode()));
-                    sess_elem.appendChild(model.createStateVar("idle time",(System.currentTimeMillis()-h.getLastAccess())/1000+""));
+                    sess_elem.appendChild(model.createStateVar("idle time",(System.currentTimeMillis()-h.getLastAccess())/1000));
                 }
             }
         }
