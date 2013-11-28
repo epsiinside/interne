@@ -114,8 +114,6 @@ public class AdminSession implements HTTPSession {
         model=parent.getStorage().createXMLAdminModel();
         login(h);
         log.info("WebMail: New Session ("+session_code+")");
-
-
         setEnv();
     }
 
@@ -248,7 +246,7 @@ public class AdminSession implements HTTPSession {
             net.wastl.webmail.server.Authenticator auth=parent.getStorage().getAuthenticator();
             if(auth.canChangePassword()) {
             try {
-                        auth.changePassword(user,head.getContent("user password"),head.getContent("user password"));
+                 auth.changePassword(user,head.getContent("user password"),head.getContent("user password"));
             }
             catch (InvalidPasswordException e) {
                 /* XXX Not sure this is the right exception */
@@ -317,7 +315,7 @@ public class AdminSession implements HTTPSession {
                 String name=(String)e.nextElement();
                 HTTPSession h=parent.getSession(name);
                 if(h instanceof WebMailSession) {
-                    WebMailSession w=(WebMailSession)h;
+                    WebMailSession w=h;
 
                     Element sess_elem=model.addStateElement("SESSION");
                     sess_elem.setAttribute("type","user");
@@ -334,7 +332,6 @@ public class AdminSession implements HTTPSession {
                         sess_elem.appendChild(model.createTextElement("SESS_CONN","Error while fetching connection "+connEntry.getKey()));
                     }
                     /* If the remote is admin and we are not the remote! */
-                    // && !h.getSessionCode().equals(session_code)
                 } else if(h instanceof AdminSession) {
                     Element sess_elem=model.addStateElement("SESSION");
                     sess_elem.setAttribute("type","admin");
