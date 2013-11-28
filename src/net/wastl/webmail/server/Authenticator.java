@@ -44,7 +44,7 @@ public abstract class Authenticator  {
 
     public abstract String getVersion();
 
-    /** Get a displamanager object for this class.
+    /** Get a display manager object for this class.
      * @see org.webengruven.webamil.auth.AuthDisplayMngr
      * @return the AuthDisplayMngr apropriate for this class.
      */
@@ -111,6 +111,6 @@ public abstract class Authenticator  {
         return true;
     }
 
-    public void changePassword(UserData udata,String newpassword,String verify)      throws InvalidPasswordException
+    public void changePassword(UserData udata,String newpassword,String verify) throws InvalidPasswordException
     { }
 }

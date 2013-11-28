@@ -47,7 +47,6 @@ public class AuthenticatorHandler  {
         }
 
         parent.getConfigScheme().configRegisterChoiceKey("AUTH","Authentication method to use.");
-        //parent.getConfigScheme().configRegisterStringKey("AUTHHOST","localhost","Host used for remote authentication (e.g. for IMAP,POP3)");
         registerAuthenticators();
         parent.getConfigScheme().setDefaultValue("AUTH","IMAP");
     }
@@ -70,11 +69,9 @@ public class AuthenticatorHandler  {
             authenticators.put(a.getKey(),a);
             log.debug("Registered authenticator plugin '"+c.getName()+"'");
         } catch(Exception ex) {
-            log.error("Failed to register Auth. plugin '" + authString + "'",
-                    ex);
+            log.error("Failed to register Auth. plugin '" + authString + "'", ex);
         }
-        log.info("Initialized " + authenticators.size()
-                + " Authenticator Plugins");
+        log.info("Initialized " + authenticators.size() + " Authenticator Plugins");
     }
 
     public Authenticator getAuthenticator(String key) {
