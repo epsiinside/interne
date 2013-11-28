@@ -33,9 +33,6 @@ import net.wastl.webmail.exceptions.WebMailException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-/**
- * @author Sebastian Schaffert
- */
 public class SystemCheck  {
     private static Log log = LogFactory.getLog(SystemCheck.class);
     public SystemCheck(WebMailServer parent) throws WebMailException {

@@ -159,8 +159,7 @@ public abstract class Storage {
                               System.getProperty("file.separator")+locale.getLanguage());
         File f=new File(language_path);
         if(!f.exists()) {
-            language_path=(parent.getProperty("webmail.template.path")+
-                           System.getProperty("file.separator")+parent.getDefaultLocale().getLanguage());
+            language_path=(parent.getProperty("webmail.template.path")+System.getProperty("file.separator")+parent.getDefaultLocale().getLanguage());
             f=new File(language_path);
             if(!f.exists()) {
                 log.error("Storage::getBasePath: Default Language templates not found \n(tried path: "+language_path+")");
@@ -170,11 +169,9 @@ public abstract class Storage {
         f=new File(theme_path);
         if(!f.exists()) {
             if(parent.getProperty("webmail.default.theme") != null) {
-                theme_path=language_path+System.getProperty("file.separator")+
-                    parent.getProperty("webmail.default.theme");
+                theme_path=language_path+System.getProperty("file.separator")+parent.getProperty("webmail.default.theme");
             } else {
-                theme_path=language_path+System.getProperty("file.separator")+
-                    "bibop";
+                theme_path=language_path+System.getProperty("file.separator")+"bibop";
             }
             f=new File(theme_path);
             if(!f.exists()) {
@@ -212,8 +209,7 @@ public abstract class Storage {
             model.update();
         return model;
         } catch(ParserConfigurationException pce) {
-            throw new WebMailException("Creating the generic XML model failed. Reason: "+
-                                       pce.getMessage());
+            throw new WebMailException("Creating the generic XML model failed. Reason: "+pce.getMessage());
         } catch(SAXException saxe) {
                 throw new WebMailException("Creating the generic XML model failed. Reason: "+saxe.getMessage());
         } catch(IOException ioe) {
@@ -232,8 +228,7 @@ public abstract class Storage {
             model.update();
             return model;
         } catch(ParserConfigurationException pce) {
-            throw new WebMailException("Creating the generic XML model failed. Reason: "+
-                                       pce.getMessage());
+            throw new WebMailException("Creating the generic XML model failed. Reason: "+pce.getMessage());
         } catch(SAXException saxe) {
                 throw new WebMailException("SAXException thrown. Reason: "+saxe.getMessage());
         } catch(IOException ioe) {
@@ -253,21 +248,21 @@ public abstract class Storage {
     public Enumeration getUsers() {
         final Enumeration domains=getVirtualDomains();
         return new Enumeration() {
-                Enumeration enumVar=null;
-                public boolean hasMoreElements() {
-                    return (domains.hasMoreElements() || (enumVar != null && enumVar.hasMoreElements()));
-                }
-                public Object nextElement() {
-                    if(enumVar == null || !enumVar.hasMoreElements()) {
-                        if(domains.hasMoreElements()) {
-                            enumVar=getUsers((String)domains.nextElement());
-                        } else {
-                            return null;
-                        }
+            Enumeration enumVar=null;
+            public boolean hasMoreElements() {
+                return (domains.hasMoreElements() || (enumVar != null && enumVar.hasMoreElements()));
+            }
+            public Object nextElement() {
+                if(enumVar == null || !enumVar.hasMoreElements()) {
+                    if(domains.hasMoreElements()) {
+                        enumVar=getUsers((String)domains.nextElement());
+                    } else {
+                        return null;
                     }
-                    return enumVar.nextElement();
                 }
-            };
+                return enumVar.nextElement();
+            }
+        };
     }
 
     /**

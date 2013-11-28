@@ -64,7 +64,6 @@ public class PluginHandler  {
         String[] pluginStrings = plugin_list.trim().split("\\s*,\\s*", -1);
         log.info("Initializing " + pluginStrings.length
                 + " WebMail Plugins ...");
-        //      System.setProperty("java.class.path",System.getProperty("java.class.path")+System.getProperty("path.separator")+pluginpath);
 
         Class plugin_class=null;
         try {
@@ -93,14 +92,14 @@ public class PluginHandler  {
             log.error("Failed to register plugin '" + pluginString + "'",
                     ex);
         }
-        log.info(Integer.toString(plugins.size()) + " plugins loaded");
+        log.info(plugins.size()) + " plugins loaded");
 
         while(!q.isEmpty()) {
             Plugin p=(Plugin)q.next();
             if(!pt.addPlugin(p)) q.queue(p);
         }
         pt.register(parent);
-        log.info(Integer.toString(plugins.size()) + " plugins initialized");
+        log.info(plugins.size()) + " plugins initialized");
     };
 
     public Enumeration getPlugins() {
