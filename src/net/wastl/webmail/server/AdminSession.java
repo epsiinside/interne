@@ -53,7 +53,7 @@ import org.webengruven.webmail.auth.AuthDisplayMngr;
 public class AdminSession implements HTTPSession {
     private static Log log = LogFactory.getLog(AdminSession.class);
 
-    /** When has the session been last accessed? */
+    /** When has the session been last accessed ? */
     private long last_access;
     /** The session-ID for this session */
     private String session_code;
