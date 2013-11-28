@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE SYSDATA SYSTEM "%DTDDIR%/sysdata.dtd">
+<SYSDATA>
+  <VIRTUALS enabled="true"/>
+  <DOMAIN>
+    <NAME>GCLC</NAME>
+    <DEFAULT_HOST>178.170.118.40</DEFAULT_HOST>
+    <AUTHENTICATION_HOST>178.170.118.40</AUTHENTICATION_HOST>
+    <RESTRICTED/>
+    <ALLOWED_HOST>localhost</ALLOWED_HOST>
+  </DOMAIN>
+</SYSDATA>
